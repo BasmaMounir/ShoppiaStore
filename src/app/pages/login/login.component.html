@@ -1,0 +1,36 @@
+<div class="login-container">
+     <div class="login-card">
+       <h2>Login</h2>
+   
+       <p class="auth-link">
+         Don't have an account?
+         <a routerLink="/register" class="link-danger">Create a free account</a>
+       </p>
+   
+       <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="login-form">
+         <div class="form-group">
+           <label for="email">Enter username</label>
+           <input type="email" id="email" formControlName="email" placeholder="Enter Username"
+                  [class.is-invalid]="email?.invalid && (email?.dirty || email?.touched)">
+           <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="invalid-feedback">
+             <div *ngIf="email?.errors?.['required']">Email is required.</div>
+             <div *ngIf="email?.errors?.['email']">Invalid email address.</div>
+           </div>
+         </div>
+   
+         <div class="form-group">
+           <label for="password">Enter Password</label>
+           <input type="password" id="password" formControlName="password" placeholder="Enter Password"
+                  [class.is-invalid]="password?.invalid && (password?.dirty || password?.touched)">
+           <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="invalid-feedback">
+             <div *ngIf="password?.errors?.['required']">Password is required.</div>
+             <div *ngIf="password?.errors?.['minlength']">Password must be at least 6 characters.</div>
+           </div>
+         </div>
+   
+         <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+   
+         <button type="submit" [disabled]="loginForm.invalid" class="btn btn-login">Login</button>
+       </form>
+     </div>
+   </div>

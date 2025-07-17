@@ -1,0 +1,114 @@
+.login-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     min-height: calc(100vh - 100px); // Adjust based on header/footer height
+     background-color: #f8f9fa; // Light background
+     padding: 20px;
+   }
+   
+   .login-card {
+     background-color: #fff;
+     padding: 40px;
+     border-radius: 8px;
+     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+     text-align: center;
+     max-width: 450px;
+     width: 100%;
+   
+     h2 {
+       font-size: 2.5rem;
+       margin-bottom: 20px;
+       color: #333;
+       font-weight: bold;
+     }
+   
+     .auth-link {
+       margin-bottom: 30px;
+       font-size: 1rem;
+       color: #666;
+   
+       .link-danger {
+         color: #dc3545; // Red color for links
+         text-decoration: none;
+         font-weight: 600;
+   
+         &:hover {
+           text-decoration: underline;
+         }
+       }
+     }
+   
+     .login-form {
+       text-align: left;
+   
+       .form-group {
+         margin-bottom: 20px;
+   
+         label {
+           display: block;
+           margin-bottom: 8px;
+           font-weight: 600;
+           color: #555;
+         }
+   
+         input[type="email"],
+         input[type="password"] {
+           width: 100%;
+           padding: 12px 15px;
+           border: 1px solid #ddd;
+           border-radius: 5px;
+           font-size: 1rem;
+           box-sizing: border-box; // Include padding and border in the element's total width and height.
+   
+           &:focus {
+             outline: none;
+             border-color: #007bff; // Blue focus border
+             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+           }
+   
+           &.is-invalid {
+             border-color: #dc3545; // Red border for invalid input
+           }
+         }
+   
+         .invalid-feedback {
+           color: #dc3545;
+           font-size: 0.875em;
+           margin-top: 5px;
+         }
+       }
+   
+       .alert-danger {
+         background-color: #f8d7da;
+         color: #721c24;
+         border: 1px solid #f5c6cb;
+         padding: 10px 15px;
+         border-radius: 5px;
+         margin-bottom: 20px;
+         font-size: 0.95rem;
+       }
+   
+       .btn-login {
+         width: 100%;
+         padding: 15px;
+         background-color: #ff6f61; // CozaStore like button color
+         color: #fff;
+         border: none;
+         border-radius: 5px;
+         font-size: 1.1rem;
+         font-weight: 600;
+         cursor: pointer;
+         transition: background-color 0.3s ease;
+   
+         &:hover:not(:disabled) {
+           background-color: #e55a50;
+         }
+   
+         &:disabled {
+           background-color: #cccccc;
+           cursor: not-allowed;
+         }
+       }
+     }
+   }

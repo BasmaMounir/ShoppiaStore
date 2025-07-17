@@ -1,0 +1,137 @@
+* {
+     margin: 0px;
+     padding: 0px;
+     box-sizing: border-box;
+   }
+   
+   ul, li {
+     margin: 0px;
+     list-style-type: none;
+   }
+   
+   a {
+     text-decoration: none;
+     color: inherit; /* Inherit color from parent */
+     &:hover {
+       text-decoration: none;
+     }
+   }
+   
+   /* CozaStore like Utility Classes (يمكن وضعها في ملف styles.scss العام) */
+   .flex-w { display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; -webkit-flex-wrap: wrap; -moz-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap; }
+   .flex-r-m { -webkit-box-pack: end; -webkit-justify-content: flex-end; -moz-box-pack: end; -ms-flex-pack: end; justify-content: flex-end; -webkit-box-align: center; -webkit-align-items: center; -moz-box-align: center; -ms-flex-align: center; align-items: center; }
+   .cl2 { color: #888888; } /* Darker grey for icons/text */
+   .trans-04 { -webkit-transition: all 0.4s; -o-transition: all 0.4s; -moz-transition: all 0.4s; transition: all 0.4s; }
+   .p-l-22 { padding-left: 22px; }
+   .p-r-11 { padding-right: 11px; }
+   .ml-1 { margin-left: 0.25rem; }
+   .ml-2 { margin-left: 0.5rem; }
+   
+   /* Header Specific Styles */
+   .header-v2 {
+     background-color: #fff;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+     position: relative;
+     z-index: 1000;
+     width: 100%;
+   }
+   
+   .container-menu-desktop {
+     max-width: 1200px; /* CozaStore max width */
+     margin: 0 auto;
+     padding: 0 15px;
+   }
+   
+   .wrap-menu-desktop {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     height: 80px; /* Standard header height */
+   }
+   
+   /* Logo */
+   .logo {
+     .logo-text {
+       font-family: 'Poppins', sans-serif;
+       font-size: 2.5rem; /* <--- زودنا حجم الخط هنا */
+       color: #333;
+       font-weight: 700;
+       text-transform: uppercase;
+       letter-spacing: 2px;
+       
+       // Optional: Add hover effect to logo if desired
+       &:hover {
+         color: #ff9900; /* Orange on hover for logo */
+         transition: color 0.3s ease;
+       }
+     }
+   }
+   
+   /* Main Menu */
+   .menu-desktop {
+     .main-menu {
+       display: flex;
+       li {
+         position: relative;
+         padding: 0 20px;
+         a {
+           font-family: 'Poppins', sans-serif;
+           font-size: 1.1rem; /* <--- زودنا حجم الخط هنا */
+           color: #555;
+           line-height: 1.2;
+           padding: 10px 0;
+           display: block;
+           position: relative;
+           transition: color 0.4s;
+   
+           &:hover {
+             color: #ff9900; /* <--- اللون الأورنج لما الماوس يروح عليها */
+           }
+         }
+         // Style for the active link (optional but good practice)
+         &.active-link a {
+           color: #ff9900; /* Orange for the active link */
+         }
+       }
+     }
+   }
+   
+   /* Icon Header */
+   .wrap-icon-header {
+     .icon-header-item {
+       font-size: 1.5rem;
+       cursor: pointer;
+       display: flex;
+       align-items: center;
+       position: relative;
+       padding: 0 10px;
+       transition: color 0.4s; /* <--- أضفنا ترانزيشن للايكونز كمان */
+   
+       &:hover {
+         color: #ff9900; /* <--- اللون الأورنج لما الماوس يروح عليها */
+       }
+   
+       .user-name {
+         font-size: 0.9rem;
+         font-weight: 600;
+         color: #555;
+         margin-right: 5px;
+       }
+   
+       .btn-logout {
+         background-color: #ff6f61;
+         color: #fff;
+         border: none;
+         padding: 5px 10px;
+         border-radius: 4px;
+         font-size: 0.85rem;
+         cursor: pointer;
+         margin-left: 10px;
+         transition: background-color 0.3s ease;
+   
+         &:hover {
+           background-color: #e55a50;
+         }
+       }
+     }
+   }

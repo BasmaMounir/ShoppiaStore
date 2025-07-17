@@ -1,0 +1,67 @@
+<section class="bg-gray-50 py-16">
+     <div class="max-w-7xl mx-auto px-4">
+       
+       <!-- Title -->
+       <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Explore Our Products</h2>
+   
+       <!-- Filter Buttons -->
+       <div class="flex flex-wrap justify-center gap-3 mb-12">
+         <button
+           class="px-5 py-2.5 rounded-full text-sm font-medium transition border shadow-sm"
+           [ngClass]="{
+             'bg-indigo-600 text-white border-indigo-600 shadow-md': selectedCategoryId === null,
+             'bg-white text-gray-600 border-gray-300 hover:bg-gray-100': selectedCategoryId !== null
+           }"
+           (click)="filterByCategory(null)">
+           All Products
+         </button>
+   
+         <button
+           *ngFor="let cat of categories"
+           class="px-5 py-2.5 rounded-full text-sm font-medium transition border shadow-sm"
+           [ngClass]="{
+             'bg-indigo-600 text-white border-indigo-600 shadow-md': selectedCategoryId === cat.id,
+             'bg-white text-gray-600 border-gray-300 hover:bg-gray-100': selectedCategoryId !== cat.id
+           }"
+           (click)="filterByCategory(cat.id)">
+           {{ cat.name }}
+         </button>
+       </div>
+   
+       <!-- Products Grid -->
+       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+         <div *ngFor="let product of products" class="bg-white shadow-md rounded-xl overflow-hidden group transition duration-300 hover:shadow-xl">
+           
+           <!-- Image Container -->
+           <div class="relative">
+             <img [src]="product.imageCover" [alt]="product.name"
+               class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" />
+             
+             <!-- Quick View Button -->
+             <a
+               [routerLink]="['/product', product.id]"
+               class="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-white text-gray-800 text-sm font-medium rounded-full opacity-0 group-hover:opacity-100 transition duration-300 shadow-md hover:bg-indigo-600 hover:text-white">
+               Quick View
+             </a>
+   
+             <!-- Heart Icon -->
+             <div class="absolute top-4 right-4 z-10">
+               <button class="relative w-6 h-6">
+                 <img src="assets/icons/icon-heart-01.png" class="absolute top-0 left-0 w-6 h-6 opacity-100 hover:opacity-0 transition" />
+                 <img src="assets/icons/icon-heart-02.png" class="absolute top-0 left-0 w-6 h-6 opacity-0 hover:opacity-100 transition" />
+               </button>
+             </div>
+           </div>
+   
+           <!-- Info Section -->
+           <div class="p-5">
+             <a [routerLink]="['/product', product.id]" class="block text-lg font-semibold text-gray-800 hover:text-indigo-600 truncate">
+               {{ product.name }}
+             </a>
+             <span class="text-indigo-600 font-bold text-xl mt-2 block">${{ product.price }}</span>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
+   

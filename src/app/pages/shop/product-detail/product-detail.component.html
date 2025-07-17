@@ -1,0 +1,71 @@
+<div *ngIf="product" class="max-w-7xl mx-auto py-16 px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
+     <!-- Images Section -->
+     <div>
+          <div class="relative overflow-hidden rounded-lg border group h-96 bg-white">
+               <img
+                 [src]="mainImageUrl"
+                 [alt]="product.name"
+                 class="w-full h-full object-contain transition-transform duration-500 ease-in-out group-hover:scale-125"
+               >
+             </div>
+             
+   
+       <div class="flex gap-4 mt-4 overflow-x-auto">
+         <img
+           [src]="product.imageCover"
+           (click)="changeMainImage(product.imageCover)"
+           [class.border-indigo-500]="mainImageUrl === product.imageCover"
+           class="w-24 h-24 object-cover cursor-pointer border-2 rounded-md transition hover:border-indigo-500" />
+   
+         <img
+           *ngFor="let img of product.images"
+           [src]="img"
+           (click)="changeMainImage(img)"
+           [class.border-indigo-500]="mainImageUrl === img"
+           class="w-24 h-24 object-cover cursor-pointer border-2 rounded-md transition hover:border-indigo-500" />
+       </div>
+     </div>
+   
+     <!-- Info Section -->
+     <div>
+       <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ product.name }}</h1>
+   
+       <p class="text-indigo-600 text-xl font-semibold mb-2">${{ product.price }}</p>
+   
+       <div class="text-yellow-500 mb-4">
+         ⭐ {{ product.ratingsAverage }} / 5
+       </div>
+   
+       <p class="text-gray-600 mb-6">
+         {{ product.description }}
+       </p>
+   
+       <!-- Quantity & Add to Cart -->
+       <div class="flex items-center gap-4 mb-6">
+         <div class="flex items-center border rounded-md">
+           <button
+             class="px-3 py-2 text-gray-600 hover:text-indigo-600 text-lg"
+             (click)="decrementQty()">
+             −
+           </button>
+           <input
+             type="number"
+             [(ngModel)]="quantity"
+             class="w-12 text-center outline-none border-l border-r"
+             min="1" />
+           <button
+             class="px-3 py-2 text-gray-600 hover:text-indigo-600 text-lg"
+             (click)="incrementQty()">
+             +
+           </button>
+         </div>
+   
+         <button
+           (click)="addToCart(product)"
+           class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition">
+           Add to Cart
+         </button>
+       </div>
+     </div>
+   </div>
+   

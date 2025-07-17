@@ -1,0 +1,79 @@
+<div class="p-6">
+     <h2 class="text-2xl font-bold mb-4">👥 All Users</h2>
+   
+     <div *ngIf="loading" class="text-gray-500">Loading users...</div>
+   
+     <table class="min-w-full bg-white border border-gray-200 rounded shadow" *ngIf="!loading">
+       <thead>
+         <tr class="bg-gray-100 text-left">
+           <th class="px-4 py-2">ID</th>
+           <th class="px-4 py-2">First Name</th>
+           <th class="px-4 py-2">Last Name</th>
+           <th class="px-4 py-2">Email</th>
+           <th class="px-4 py-2">Phone</th>
+           <th class="px-4 py-2">Role</th>
+           <th class="px-4 py-2">Status</th>
+           <th class="px-4 py-2">Actions</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr *ngFor="let user of users" class="hover:bg-gray-50">
+           <td class="px-4 py-2">{{ user.id }}</td>
+           <td class="px-4 py-2">{{ user.firstName }}</td>
+           <td class="px-4 py-2">{{ user.lastName }}</td>
+           <td class="px-4 py-2">{{ user.email }}</td>
+           <td class="px-4 py-2">{{ user.phone || '-' }}</td>
+   
+           <!-- Role Dropdown -->
+           <td class="px-4 py-2">
+             <select
+               [(ngModel)]="user.role"
+               (change)="updateRole(user, user.role)"
+               class="border rounded px-2 py-1"
+             >
+               <option value="ROLE_USER" [selected]="user.role === 'ROLE_USER'">User</option>
+               <option value="ROLE_ADMIN" [selected]="user.role === 'ROLE_ADMIN'">Admin</option>
+             </select>
+           </td>
+   
+           <!-- Status -->
+           <td class="px-4 py-2">
+             <span
+               [ngClass]="{
+                 'text-green-600 font-semibold': user.enabled,
+                 'text-red-600 font-semibold': !user.enabled
+               }"
+             >
+               {{ user.enabled ? 'Active' : 'Inactive' }}
+             </span>
+           </td>
+   
+           <!-- Activate / Deactivate -->
+           <td class="px-4 py-2 space-x-2">
+             <button
+               class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded"
+               (click)="activateUser(user.id)"
+               *ngIf="!user.enabled"
+             >
+               Activate
+             </button>
+             <button
+               class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+               (click)="deactivateUser(user.id)"
+               *ngIf="user.enabled"
+             >
+               Deactivate
+             </button>
+             
+             <button
+             class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+             (click)="deleteUser(user.id)"
+           >
+             Delete
+           </button>   
+           </td>
+         </tr>
+       </tbody>
+     </table>
+   </div>
+   

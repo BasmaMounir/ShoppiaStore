@@ -1,0 +1,51 @@
+<!--  Slider -->
+<div class="relative w-full overflow-hidden">
+     <div class="flex transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+       <div *ngFor="let slide of slides" class="min-w-full relative h-[500px] md:h-[600px]">
+         <img [src]="slide.image" class="w-full h-full object-cover" />
+         <div class="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white text-center px-4">
+           <h2 class="text-3xl md:text-5xl font-bold mb-4">{{ slide.title }}</h2>
+           <p class="text-sm md:text-base">{{ slide.subtitle }}</p>
+         </div>
+       </div>
+     </div>
+   
+     <button (click)="prevSlide()" class="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl font-bold hover:text-pink-400">‹</button>
+     <button (click)="nextSlide()" class="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl font-bold hover:text-pink-400">›</button>
+   </div>
+   
+
+
+<section class="py-16 bg-gray-50">
+     <div class="max-w-7xl mx-auto px-4">
+       <!-- Title -->
+       <div class="text-center mb-10">
+         <h2 class="text-3xl font-bold text-gray-800">Shop by Category</h2>
+       </div>
+   
+       <!-- Categories Grid -->
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+         <div *ngFor="let category of categories" class="relative overflow-hidden rounded-xl shadow hover:shadow-xl transition duration-300 group">
+           <img
+             [src]="category.imageUrl"
+             [alt]="category.name"
+             class="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-105"
+           />
+   
+           <a [routerLink]="['/shop']" [queryParams]="{ category: category.id }"
+              class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-6 text-white opacity-0 group-hover:opacity-100 transition duration-300">
+   
+             <div>
+               <h3 class="text-xl font-semibold">{{ category.name }}</h3>
+               <p class="text-sm text-gray-200 mt-1">Shop Now</p>
+             </div>
+   
+             <div>
+               <span class="text-sm underline">View All</span>
+             </div>
+           </a>
+         </div>
+       </div>
+     </div>
+   </section>
+   
