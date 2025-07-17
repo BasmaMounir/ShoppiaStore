@@ -36,8 +36,7 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
-      address: ['', Validators.required],
-      role: ['ROLE_USER', Validators.required]
+      address: ['', Validators.required]
     });
   }
 
@@ -73,5 +72,4 @@ export class RegisterComponent implements OnInit {
   get lastName() { return this.registerForm.get('lastName'); }
   get phone() { return this.registerForm.get('phone'); }
   get address() { return this.registerForm.get('address'); }
-  get role() { return this.registerForm.get('role'); }
 }
