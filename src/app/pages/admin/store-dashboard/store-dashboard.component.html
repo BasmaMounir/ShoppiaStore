@@ -1,0 +1,73 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Store Dashboard</h1>
+    <p>Overview of your store's key metrics</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card warehouses-card">
+      <div class="metric-icon">
+        <mat-icon>warehouse</mat-icon>
+      </div>
+      <div class="metric-content">
+        <h3>Total Warehouses</h3>
+        <div class="metric-value">{{ totalWarehouses }}</div>
+        <p class="metric-description">Active warehouse locations</p>
+      </div>
+    </div>
+
+    <div class="metric-card products-card">
+      <div class="metric-icon">
+        <mat-icon>inventory</mat-icon>
+      </div>
+      <div class="metric-content">
+        <h3>Total Products</h3>
+        <div class="metric-value">{{ totalProducts }}</div>
+        <p class="metric-description">Available products in catalog</p>
+      </div>
+    </div>
+
+    <div class="metric-card stock-card">
+      <div class="metric-icon">
+        <mat-icon>shopping_cart</mat-icon>
+      </div>
+      <div class="metric-content">
+        <h3>Total Stock</h3>
+        <div class="metric-value">{{ totalStock }}</div>
+        <p class="metric-description">Items across all warehouses</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-actions">
+    <div class="action-section">
+      <h2>Quick Actions</h2>
+      <div class="action-buttons" style="display: flex; flex-direction: column; gap: 16px; align-items: center;">
+        <div style="display: flex; gap: 12px;">
+          <button mat-raised-button color="primary" routerLink="/admin/dashboard/manage-warehouses">
+            <mat-icon>warehouse</mat-icon>
+            Manage Warehouses
+          </button>
+          <button mat-raised-button color="accent" routerLink="/admin/dashboard/manage-stock">
+            <mat-icon>inventory</mat-icon>
+            Manage Stock
+          </button>
+          <button mat-raised-button color="warn" routerLink="/admin/dashboard/history">
+            <mat-icon>history</mat-icon>
+            View History
+          </button>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <button mat-raised-button color="warn" routerLink="/admin/dashboard/warehouses">
+            <mat-icon>warehouses</mat-icon>
+            Search by Warehouse
+          </button>
+          <button mat-raised-button color="warn" routerLink="/admin/dashboard/products">
+            <mat-icon>search</mat-icon>
+            Search by Product
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

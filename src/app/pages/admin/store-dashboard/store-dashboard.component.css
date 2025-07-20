@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+:host {
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #222;
+  background: #f8f9fb;
+  min-height: 100vh;
+  display: block;
+}
+
+.dashboard-container {
+  padding: 40px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.dashboard-header h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #7F56D9;
+  margin-bottom: 12px;
+  letter-spacing: 0.01em;
+}
+
+.dashboard-header p {
+  font-size: 1.3rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+  margin-bottom: 60px;
+}
+
+.metric-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 32px;
+  box-shadow: 0 8px 32px rgba(127,86,217,0.10);
+  border: 1.5px solid #ececec;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #7F56D9, #9C6FE4);
+}
+
+.metric-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(127,86,217,0.20);
+}
+
+.warehouses-card::before {
+  background: linear-gradient(90deg, #7F56D9, #9C6FE4);
+}
+
+.products-card::before {
+  background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+}
+
+.stock-card::before {
+  background: linear-gradient(90deg, #4ECDC4, #6EE7DF);
+}
+
+.metric-icon {
+  background: #f6f3ff;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  height: 80px;
+}
+
+.metric-icon mat-icon {
+  font-size: 2.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #7F56D9;
+}
+
+.products-card .metric-icon {
+  background: #fff5f5;
+}
+
+.products-card .metric-icon mat-icon {
+  color: #FF6B6B;
+}
+
+.stock-card .metric-icon {
+  background: #f0fffd;
+}
+
+.stock-card .metric-icon mat-icon {
+  color: #4ECDC4;
+}
+
+.metric-content {
+  flex: 1;
+}
+
+.metric-content h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.metric-value {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #7F56D9;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.products-card .metric-value {
+  color: #FF6B6B;
+}
+
+.stock-card .metric-value {
+  color: #4ECDC4;
+}
+
+.metric-description {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+  margin: 0;
+}
+
+.dashboard-actions {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 8px 32px rgba(34,34,34,0.10);
+  border: 1.5px solid #ececec;
+}
+
+.action-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #7F56D9;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.action-buttons button {
+  padding: 16px 32px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.action-buttons button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.action-buttons mat-icon {
+  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 2.2rem;
+  }
+  
+  .dashboard-header p {
+    font-size: 1.1rem;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .metric-card {
+    padding: 24px 20px;
+  }
+  
+  .metric-value {
+    font-size: 2.2rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .action-buttons button {
+    width: 100%;
+    max-width: 300px;
+  }
+}

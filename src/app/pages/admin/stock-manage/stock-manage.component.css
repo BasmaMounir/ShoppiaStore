@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+:host {
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #222;
+  background: #f8f9fb;
+  min-height: 100vh;
+  display: block;
+}
+
+.manage-stock-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(34,34,34,0.10);
+  padding: 48px 40px 40px 40px;
+}
+
+h2 {
+  color: #7F56D9;
+  font-size: 2.3rem;
+  font-weight: 800;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.stock-form {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stock-form mat-form-field {
+  min-width: 220px;
+  font-size: 1.3rem;
+}
+
+.stock-form input,
+.stock-form .mat-input-element {
+  font-size: 1.3rem;
+  height: 48px;
+  padding: 10px 14px;
+}
+
+.stock-form button {
+  height: 48px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0 28px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.stock-form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-left: 16px;
+  align-items: stretch;
+}
+
+.stock-form-buttons button {
+  width: 180px;
+  align-self: center;
+}
+
+.stock-list-section {
+  margin-top: 32px;
+}
+
+h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #7F56D9;
+  margin-bottom: 18px;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 1.18rem;
+  background: #fff;
+  margin-bottom: 18px;
+}
+
+.styled-table th, .styled-table td {
+  font-size: 1.5rem;
+  padding: 32px 48px;
+  border-bottom: 1.5px solid #eee;
+  color: #222;
+}
+
+.styled-table th {
+  font-weight: 800;
+  background: #f6f3ff;
+  color: #7F56D9;
+  font-size: 1.7rem;
+}
+
+.styled-table tr:last-child td {
+  border-bottom: none;
+}
+
+.styled-table tr:hover {
+  background: #f5f5f5;
+}
+
+.no-stock-message {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #7F56D9;
+  margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+  .manage-stock-container {
+    padding: 18px 6px 18px 6px;
+  }
+  .stock-form mat-form-field {
+    min-width: 120px;
+  }
+  .styled-table th, .styled-table td {
+    padding: 10px 6px;
+    font-size: 1rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
+} 

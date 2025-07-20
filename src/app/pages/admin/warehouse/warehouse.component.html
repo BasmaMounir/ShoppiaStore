@@ -1,0 +1,33 @@
+<div class="warehouse-header-section">
+  <h3>Select Warehouse</h3>
+  <mat-form-field appearance="fill">
+    <mat-label>Warehouse</mat-label>
+    <mat-select [(ngModel)]="warehouseId" (selectionChange)="onWarehouseSelect()">
+      <mat-option *ngFor="let w of warehouses" [value]="w.warehouseId">
+        {{ w.location }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<section class="warehouse-card-section">
+  <div *ngIf="stockList.length > 0; else noStock" class="warehouse-card-grid">
+    <div *ngFor="let item of stockList" class="warehouse-card">
+      <div class="warehouse-card-name">{{ item.name }}</div>
+      <div class="warehouse-card-image">
+        <img [src]="item.imageCover" alt="{{ item.name }}" />
+      </div>
+      <div class="warehouse-card-details">
+        <div class="desc">{{ item.description }}</div>
+        <div class="info-row"><span>Id:</span> <span>{{ item.productId }}</span></div>
+        <div class="info-row"><span>Price:</span> <span>{{ item.price | currency }}</span></div>
+        <div class="info-row"><span>Quantity:</span> <span>{{ item.quantity }}</span></div>
+        <div class="info-row"><span>Updated At:</span> <span>{{ item.updatedAt | date }}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #noStock>
+  <p *ngIf="warehouseId" class="no-stock-message">No stock found for selected warehouse.</p>
+</ng-template>

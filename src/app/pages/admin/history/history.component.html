@@ -1,0 +1,97 @@
+<div class="history-filter-section">
+  <h2>Filter History Records</h2>
+  <form (ngSubmit)="onFilterSubmit()" #filterForm="ngForm">
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Product</mat-label>
+      <mat-select [(ngModel)]="productId" name="productId">
+        <mat-option [value]="null">All Products</mat-option>
+        <mat-option *ngFor="let product of products" [value]="product.productId">
+          {{ product.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>Warehouse</mat-label>
+      <mat-select [(ngModel)]="warehouseId" name="warehouseId">
+        <mat-option [value]="null">All Warehouses</mat-option>
+        <mat-option *ngFor="let warehouse of warehouses" [value]="warehouse.warehouseId">
+          {{ warehouse.location }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Search</button>
+  </form>
+</div>
+
+<!-- Bulk Delete Controls -->
+<div class="bulk-delete-section">
+  <mat-form-field appearance="outline" class="bulk-delete-field">
+    <mat-label>Product ID</mat-label>
+    <input matInput [(ngModel)]="bulkDeleteProductId" name="bulkDeleteProductId" placeholder="Enter Product ID">
+  </mat-form-field>
+  <button mat-stroked-button color="warn" (click)="onBulkDeleteByProductId()">Delete by Product ID</button>
+
+  <mat-form-field appearance="outline" class="bulk-delete-field">
+    <mat-label>Warehouse ID</mat-label>
+    <input matInput [(ngModel)]="bulkDeleteWarehouseId" name="bulkDeleteWarehouseId" placeholder="Enter Warehouse ID">
+  </mat-form-field>
+  <button mat-stroked-button color="warn" (click)="onBulkDeleteByWarehouseId()">Delete by Warehouse ID</button>
+
+  <!-- New: Delete by Product & Warehouse -->
+  <mat-form-field appearance="outline" class="bulk-delete-field">
+    <mat-label>Product ID (Both)</mat-label>
+    <input matInput [(ngModel)]="bulkDeleteBothProductId" name="bulkDeleteBothProductId" placeholder="Product ID">
+  </mat-form-field>
+  <mat-form-field appearance="outline" class="bulk-delete-field">
+    <mat-label>Warehouse ID (Both)</mat-label>
+    <input matInput [(ngModel)]="bulkDeleteBothWarehouseId" name="bulkDeleteBothWarehouseId" placeholder="Warehouse ID">
+  </mat-form-field>
+  <button mat-stroked-button color="warn" (click)="onBulkDeleteByProductAndWarehouse()">Delete by Product & Warehouse</button>
+</div>
+
+<!-- Display table only if results exist -->
+<div *ngIf="historyRecords.length > 0; else noResults" class="history-table-section">
+  <table mat-table [dataSource]="historyRecords" class="mat-elevation-z8 styled-table">
+    <!-- Product ID -->
+    <ng-container matColumnDef="productId">
+      <th mat-header-cell *matHeaderCellDef> Product ID </th>
+      <td mat-cell *matCellDef="let record"> {{ record.productId }} </td>
+    </ng-container>
+    <!-- Warehouse -->
+    <ng-container matColumnDef="warehouse">
+      <th mat-header-cell *matHeaderCellDef> Warehouse </th>
+      <td mat-cell *matCellDef="let record"> {{ record.warehouseId }} </td>
+    </ng-container>
+    <!-- Operation -->
+    <ng-container matColumnDef="operation">
+      <th mat-header-cell *matHeaderCellDef> Operation </th>
+      <td mat-cell *matCellDef="let record"> {{ record.operation }} </td>
+    </ng-container>
+    <!-- Quantity -->
+    <ng-container matColumnDef="quantityChanged">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let record"> {{ record.quantityChanged }} </td>
+    </ng-container>
+    <!-- Date -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let record"> {{ record.createdAt | date:'short' }} </td>
+    </ng-container>
+    <!-- Delete Action -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let record">
+        <button mat-icon-button color="warn" (click)="onDeleteRecord(record)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<!-- No results message -->
+<ng-template #noResults>
+  <p *ngIf="historyRecords" class="no-stock-message">No history records found.</p>
+</ng-template>

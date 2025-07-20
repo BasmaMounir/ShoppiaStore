@@ -7,6 +7,12 @@ import { ProductDetailComponent } from './pages/shop/product-detail/product-deta
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { AdminGuard } from './admin.guard';
 import { AboutComponent } from './pages/about/about.component';
+import { StoreDashboardComponent } from './pages/admin/store-dashboard/store-dashboard.component';
+import { WarehouseComponent } from './pages/admin/warehouse/warehouse.component';
+import { ProductComponent } from './pages/admin/product/product.component';
+import { HistoryComponent } from './pages/admin/history/history.component';
+import { WarehouseManageComponent } from './pages/admin/warehouse/warehouse-manage.component';
+import { StockManageComponent } from './pages/admin/stock-manage/stock-manage.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,7 +24,15 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   {
     path: 'admin/dashboard',
-    component: DashboardComponent,
     canActivate: [AdminGuard],
-  },
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'store-dashboard', component: StoreDashboardComponent },
+      { path: 'warehouses', component: WarehouseComponent },
+      { path: 'products', component: ProductComponent },
+      { path: 'history', component: HistoryComponent },
+      { path: 'manage-warehouses', component: WarehouseManageComponent },
+      { path: 'manage-stock', component: StockManageComponent },
+    ]
+  }
 ];

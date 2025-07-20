@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+:host {
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #222;
+  background: #f8f9fb;
+  min-height: 100vh;
+  display: block;
+}
+
+.warehouse-header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 48px;
+  margin-bottom: 56px;
+}
+
+.warehouse-header-section h3 {
+  color: #7F56D9;
+  font-weight: 800;
+  margin-bottom: 28px;
+  font-size: 2.1rem;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+
+.warehouse-header-section mat-form-field {
+  min-width: 340px;
+  font-size: 1.35rem;
+}
+
+mat-form-field {
+  font-size: 1.35rem !important;
+  min-height: 60px;
+}
+
+mat-label {
+  font-size: 1.25rem !important;
+}
+
+.mat-select, .mat-option, .mat-select-value {
+  font-size: 2rem !important;
+  min-height: 64px !important;
+}
+
+::ng-deep .mat-option {
+  font-size: 2rem !important;
+  min-height: 64px !important;
+}
+
+::ng-deep .mat-select-panel .mat-option {
+  font-size: 2rem !important;
+  min-height: 64px !important;
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+}
+
+::ng-deep .mat-select-value {
+  font-size: 2rem !important;
+  min-height: 64px !important;
+}
+
+::ng-deep .mat-form-field-label {
+  font-size: 1.5rem !important;
+}
+
+.warehouse-card-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.warehouse-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 48px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.warehouse-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(127,86,217,0.10);
+  border: 1px solid #ececec;
+  padding: 38px 28px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.warehouse-card:hover {
+  box-shadow: 0 12px 36px rgba(127,86,217,0.18);
+  transform: translateY(-6px) scale(1.03);
+}
+
+.warehouse-card-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #7F56D9;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.warehouse-card-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.warehouse-card-image img {
+  max-width: 240px;
+  max-height: 180px;
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(127,86,217,0.13);
+}
+
+.warehouse-card-details {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.desc {
+  color: #555;
+  font-size: 1.35rem;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.no-stock-message {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #7F56D9;
+  margin-top: 40px;
+}
+
+@media (max-width: 900px) {
+  .warehouse-card-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 98vw;
+  }
+  .warehouse-card {
+    padding: 18px 6px 14px 6px;
+    max-width: 98vw;
+  }
+  .warehouse-header-section {
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+  .warehouse-header-section h3 {
+    font-size: 1.3rem;
+  }
+}

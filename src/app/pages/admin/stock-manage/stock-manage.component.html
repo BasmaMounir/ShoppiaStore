@@ -1,0 +1,46 @@
+<div class="manage-stock-container">
+  <h2>Manage Stock</h2>
+  <form class="stock-form" (ngSubmit)="onAddStock()">
+    <mat-form-field appearance="fill">
+      <mat-label>Product ID *</mat-label>
+      <input matInput [(ngModel)]="selectedProduct" name="selectedProduct" placeholder="Enter product ID" required type="number">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Warehouse ID *</mat-label>
+      <input matInput [(ngModel)]="selectedWarehouse" name="selectedWarehouse" placeholder="Enter warehouse ID" required type="number">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Quantity *</mat-label>
+      <input matInput type="number" [(ngModel)]="quantity" name="quantity" placeholder="Enter quantity" required min="1">
+    </mat-form-field>
+    <div class="stock-form-buttons">
+      <button mat-raised-button color="primary" type="submit">Add Stock</button>
+      <button mat-raised-button color="warn" type="button" (click)="onConsumeStock()">Consume Stock</button>
+    </div>
+  </form>
+
+  <div class="stock-list-section">
+    <h3>Current Stock</h3>
+    <table mat-table [dataSource]="stockList" class="mat-elevation-z8 styled-table">
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef> Product </th>
+        <td mat-cell *matCellDef="let s">{{ s.productId }}</td>
+      </ng-container>
+      <ng-container matColumnDef="warehouse">
+        <th mat-header-cell *matHeaderCellDef> Warehouse </th>
+        <td mat-cell *matCellDef="let s">{{ s.warehouseId }}</td>
+      </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let s">{{ s.quantity }}</td>
+      </ng-container>
+      <ng-container matColumnDef="updatedAt">
+        <th mat-header-cell *matHeaderCellDef> Last Updated </th>
+        <td mat-cell *matCellDef="let s">{{ s.updatedAt | date:'longDate' }}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['product', 'warehouse', 'quantity', 'updatedAt']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['product', 'warehouse', 'quantity', 'updatedAt'];"></tr>
+    </table>
+    <p *ngIf="stockList.length === 0" class="no-stock-message">No stock records found.</p>
+  </div>
+</div> 
