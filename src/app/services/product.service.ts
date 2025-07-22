@@ -6,9 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private allProductsUrl = 'http://localhost:8085/products';
-  private productsByCategoryUrl = 'http://localhost:8085/products/category';
-  private productByIdUrl = 'http://localhost:8085/products/id';
+  private allProductsUrl = 'https://catalog-service-production.up.railway.app/products';
 
   constructor(private http: HttpClient) { }
 
@@ -17,10 +15,10 @@ export class ProductService {
   }
 
   getProductsByCategoryId(categoryId: number): Observable<any> {
-    return this.http.get<any>(`${this.productsByCategoryUrl}/${categoryId}`);
+    return this.http.get<any>(`${this.allProductsUrl}/category/${categoryId}`);
   }
 
   getProductById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.productByIdUrl}/${id}`);
+    return this.http.get<any>(`${this.allProductsUrl}/id/${id}`);
   }
 }

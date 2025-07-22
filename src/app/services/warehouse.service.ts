@@ -9,7 +9,7 @@ import { Warehouse } from '../models/Warehouse';
 
 export class WarehouseService{
 
-  private server = 'http://localhost:8081/warehouses';
+  private server = 'https://store-api-production-1ed8.up.railway.app/warehouses';
 
   constructor(private http: HttpClient) {}
 

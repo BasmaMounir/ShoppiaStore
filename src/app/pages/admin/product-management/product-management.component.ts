@@ -34,7 +34,7 @@ export class ProductManagementComponent {
   }
 
   loadProductById() {
-    const url = `http://localhost:8085/products/id/${this.loadProductId}`;
+    const url = `https://catalog-service-production.up.railway.app/products/id/${this.loadProductId}`;
     this.http.get<any>(url).subscribe({
       next: (product) => {
         this.updateProductId = this.loadProductId;
@@ -53,7 +53,7 @@ export class ProductManagementComponent {
   }
 
   updateProduct() {
-     const url = `http://localhost:8085/products/${this.updateProductId}`;
+     const url = `https://catalog-service-production.up.railway.app/products/${this.updateProductId}`;
      console.log("Product Sent 📨", this.product); 
    
      this.http.patch(url, this.product, {
@@ -68,7 +68,7 @@ export class ProductManagementComponent {
    
 
   deleteProduct() {
-    const url = `http://localhost:8085/products/${this.deleteProductId}`;
+    const url = `https://catalog-service-production.up.railway.app/products/${this.deleteProductId}`;
     this.http
       .delete(url, {
         headers: this.getAuthHeaders(),
@@ -81,7 +81,7 @@ export class ProductManagementComponent {
 
   addProduct() {
     this.http
-      .post('http://localhost:8085/products', this.product, {
+      .post('https://catalog-service-production.up.railway.app/products', this.product, {
         headers: this.getAuthHeaders(),
       })
       .subscribe({

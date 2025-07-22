@@ -18,8 +18,8 @@ interface JwtPayload {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/auth';
-  private usersApiUrl = 'http://localhost:8080/users';
+  private apiUrl = 'https://userservice-production-f0da.up.railway.app/auth';
+  private usersApiUrl = 'https://userservice-production-f0da.up.railway.app/users';
   private currentUserSubject: BehaviorSubject<User | null>;
   public currentUser: Observable<User | null>;
   private _roleCheckTrigger = new BehaviorSubject<void>(undefined);

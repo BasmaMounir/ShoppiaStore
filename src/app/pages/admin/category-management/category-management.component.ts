@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class CategoryManagementComponent {
   constructor(private http: HttpClient) {}
 
-  baseUrl = 'http://localhost:8085/categories';
+  baseUrl = 'https://catalog-service-production.up.railway.app/categories';
 
   activeSection: string = 'load';
 

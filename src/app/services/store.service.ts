@@ -11,7 +11,7 @@ import { Store } from '../models/Store';
   providedIn: 'root',
 })
 export class StoreService {
-  private server = 'http://localhost:8081/stores';
+  private server = 'https://store-api-production-1ed8.up.railway.app/stores';
 
   constructor(private http: HttpClient) {}
 

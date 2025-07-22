@@ -38,7 +38,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   fetchUsers() {
-     this.http.get<User[]>('http://localhost:8080/users', {
+     this.http.get<User[]>('https://userservice-production-f0da.up.railway.app/users', {
        headers: this.getAuthHeaders()
      }).subscribe(users => {
        console.log('Fetched users:', users);
@@ -48,19 +48,19 @@ export class UserManagementComponent implements OnInit {
    
 
   activateUser(id: number) {
-    this.http.put(`http://localhost:8080/users/${id}/activate`, {}, {
+    this.http.put(`https://userservice-production-f0da.up.railway.app/${id}/activate`, {}, {
       headers: this.getAuthHeaders()
     }).subscribe(() => this.fetchUsers());
   }
 
   deactivateUser(id: number) {
-    this.http.put(`http://localhost:8080/users/${id}/deactivate`, {}, {
+    this.http.put(`https://userservice-production-f0da.up.railway.app/${id}/deactivate`, {}, {
       headers: this.getAuthHeaders()
     }).subscribe(() => this.fetchUsers());
   }
 
   deleteUser(id: number) {
-     this.http.delete(`http://localhost:8080/users/${id}/delete`, {
+     this.http.delete(`https://userservice-production-f0da.up.railway.app/${id}/delete`, {
        headers: this.getAuthHeaders()
      }).subscribe(() => {
        this.users = this.users.filter(user => user.id !== id); 
@@ -70,7 +70,7 @@ export class UserManagementComponent implements OnInit {
    
    
    updateRole(user: User, newRole: string) {
-     this.http.put(`http://localhost:8080/users/${user.id}/role`, {
+     this.http.put(`https://userservice-production-f0da.up.railway.app/${user.id}/role`, {
        role: newRole
      }, {
        headers: this.getAuthHeaders(),

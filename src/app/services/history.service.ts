@@ -9,7 +9,7 @@ import { History } from '../models/History';
 
 export class HistoryService {
 
-  private server = 'http://localhost:8081/history';
+  private server = 'https://store-api-production-1ed8.up.railway.app/history';
 
   constructor(private http: HttpClient) {}
 

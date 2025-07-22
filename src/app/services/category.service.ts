@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoryService {
-  private apiUrl = 'http://localhost:8085/categories';
+  private apiUrl = 'https://catalog-service-production.up.railway.app/categories';
 
   constructor(private http: HttpClient) { }
 
