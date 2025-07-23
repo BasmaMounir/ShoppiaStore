@@ -4,12 +4,12 @@ import { UserManagementComponent } from "../user-management/user-management.comp
 import { ProductManagementComponent } from "../product-management/product-management.component";
 import { CategoryManagementComponent } from "../category-management/category-management.component";
 import { StoreDashboardComponent } from '../store-dashboard/store-dashboard.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, UserManagementComponent, ProductManagementComponent,
-     CategoryManagementComponent, StoreDashboardComponent],
+  imports: [CommonModule, UserManagementComponent, ProductManagementComponent, CategoryManagementComponent, StoreDashboardComponent, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

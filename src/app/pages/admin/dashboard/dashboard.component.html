@@ -1,77 +1,55 @@
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
-     <!-- Products Card -->
-     <div
-       class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-teal-500 hover:bg-teal-600"
-       (click)="setActive('products')"
-       [ngClass]="{'ring-4 ring-white': activeSection === 'products'}"
-     >
-       <div class="flex items-center justify-between">
-         <i class="fas fa-shopping-cart text-2xl"></i>
-         <div class="text-right">
-           <div class="text-sm">Products</div>
-         </div>
-       </div>
-     </div>
-   
-     <!-- Users Card -->
-     <div
-       class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-pink-500 hover:bg-pink-600"
-       (click)="setActive('users')"
-       [ngClass]="{'ring-4 ring-white': activeSection === 'users'}"
-     >
-       <div class="flex items-center justify-between">
-         <i class="fas fa-user text-2xl"></i>
-         <div class="text-right">
-           <div class="text-sm">Users</div>
-         </div>
-       </div>
-     </div>
-   
-     <!-- Category Card -->
-     <div
-       class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-orange-400 hover:bg-orange-500"
-       (click)="setActive('category')"
-       [ngClass]="{'ring-4 ring-white': activeSection === 'category'}"
-     >
-       <div class="flex items-center justify-between">
-         <i class="fas fa-shopping-cart text-2xl"></i>
-         <div class="text-right">
-           <div class="text-sm">Category</div>
-         </div>
-       </div>
-     </div>
-   
-     <!-- Stock Card -->
-     <div
-       class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-emerald-500 hover:bg-emerald-600"
-       (click)="setActive('stock')"
-       [ngClass]="{'ring-4 ring-white': activeSection === 'stock'}"
-     >
-       <div class="flex items-center justify-between">
-         <i class="fas fa-home text-2xl"></i>
-         <div class="text-right">
-           <div class="text-sm">Stock</div>
-         </div>
-       </div>
-     </div>
-   </div>
-   
-   <!-- Details Section -->
-   <div class="p-6">
-     <div *ngIf="activeSection === 'products'">
-          <app-product-management></app-product-management>
-     </div>
-   
-     <div *ngIf="activeSection === 'users'">
-          <app-user-management></app-user-management>
-     </div>
-   
-     <div *ngIf="activeSection === 'category'">
-       <app-category-management></app-category-management>
-     </div>
-   
-     <div *ngIf="activeSection === 'stock'">
-      <app-store-dashboard></app-store-dashboard>
-     </div>
-   </div>
+  <div
+    class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-teal-500 hover:bg-teal-600"
+    routerLink="products"
+    routerLinkActive="ring-4 ring-white"
+  >
+    <div class="flex items-center justify-between">
+      <i class="fas fa-shopping-cart text-2xl"></i>
+      <div class="text-right">
+        <div class="text-sm">Products</div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-pink-500 hover:bg-pink-600"
+    routerLink="users"
+    routerLinkActive="ring-4 ring-white"
+  >
+    <div class="flex items-center justify-between">
+      <i class="fas fa-user text-2xl"></i>
+      <div class="text-right">
+        <div class="text-sm">Users</div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-orange-400 hover:bg-orange-500"
+    routerLink="category"
+    routerLinkActive="ring-4 ring-white"
+  >
+    <div class="flex items-center justify-between">
+      <i class="fas fa-shopping-cart text-2xl"></i>
+      <div class="text-right">
+        <div class="text-sm">Category</div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-emerald-500 hover:bg-emerald-600"
+    routerLink="stock"
+    routerLinkActive="ring-4 ring-white"
+  >
+    <div class="flex items-center justify-between">
+      <i class="fas fa-home text-2xl"></i>
+      <div class="text-right">
+        <div class="text-sm">Stock</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-6">
+  <router-outlet></router-outlet>
+</div>
    

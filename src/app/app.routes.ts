@@ -13,6 +13,9 @@ import { ProductComponent } from './pages/admin/product/product.component';
 import { HistoryComponent } from './pages/admin/history/history.component';
 import { WarehouseManageComponent } from './pages/admin/warehouse/warehouse-manage.component';
 import { StockManageComponent } from './pages/admin/stock-manage/stock-manage.component';
+import { ProductManagementComponent } from './pages/admin/product-management/product-management.component';
+import { UserManagementComponent } from './pages/admin/user-management/user-management.component';
+import { CategoryManagementComponent } from './pages/admin/category-management/category-management.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,11 +28,16 @@ export const routes: Routes = [
   {
     path: 'admin/dashboard',
     canActivate: [AdminGuard],
+    component: DashboardComponent,
     children: [
-      { path: '', component: DashboardComponent },
+      { path: '', redirectTo: 'products', pathMatch: 'full' },
+      { path: 'products', component: ProductManagementComponent },
+      { path: 'users', component: UserManagementComponent },
+      { path: 'category', component: CategoryManagementComponent },
+      { path: 'stock', component: StoreDashboardComponent },
       { path: 'store-dashboard', component: StoreDashboardComponent },
       { path: 'warehouses', component: WarehouseComponent },
-      { path: 'products', component: ProductComponent },
+      { path: 'products-search', component: ProductComponent },
       { path: 'history', component: HistoryComponent },
       { path: 'manage-warehouses', component: WarehouseManageComponent },
       { path: 'manage-stock', component: StockManageComponent },
