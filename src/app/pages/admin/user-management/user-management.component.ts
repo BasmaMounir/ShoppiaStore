@@ -48,20 +48,23 @@ export class UserManagementComponent implements OnInit {
    
 
   activateUser(id: number) {
-    this.http.put(`https://userservice-production-f0da.up.railway.app/${id}/activate`, {}, {
-      headers: this.getAuthHeaders()
+    this.http.put(`https://userservice-production-f0da.up.railway.app/users/${id}/activate`, {}, {
+      headers: this.getAuthHeaders(),
+      responseType: 'text'
     }).subscribe(() => this.fetchUsers());
   }
 
   deactivateUser(id: number) {
-    this.http.put(`https://userservice-production-f0da.up.railway.app/${id}/deactivate`, {}, {
-      headers: this.getAuthHeaders()
+    this.http.put(`https://userservice-production-f0da.up.railway.app/users/${id}/deactivate`, {}, {
+      headers: this.getAuthHeaders(),
+      responseType: 'text'
     }).subscribe(() => this.fetchUsers());
   }
 
   deleteUser(id: number) {
-     this.http.delete(`https://userservice-production-f0da.up.railway.app/${id}/delete`, {
-       headers: this.getAuthHeaders()
+     this.http.delete(`https://userservice-production-f0da.up.railway.app/users/${id}/delete`, {
+       headers: this.getAuthHeaders(),
+       responseType: 'text'
      }).subscribe(() => {
        this.users = this.users.filter(user => user.id !== id); 
        this.fetchUsers(); 
@@ -70,7 +73,7 @@ export class UserManagementComponent implements OnInit {
    
    
    updateRole(user: User, newRole: string) {
-     this.http.put(`https://userservice-production-f0da.up.railway.app/${user.id}/role`, {
+     this.http.put(`https://userservice-production-f0da.up.railway.app/users/${user.id}/role`, {
        role: newRole
      }, {
        headers: this.getAuthHeaders(),
