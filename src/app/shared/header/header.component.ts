@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   currentUser: User | null = null;
   isLoggedIn: boolean = false;
   isAdmin$: Observable<boolean>;
+  showProfileMenu = false;
 
   constructor(private authService: AuthService) {
     this.isAdmin$ = this.authService.isAdmin$;
@@ -27,13 +28,33 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.currentUser.subscribe(user => {
       console.log('👤 currentUser from header:', user);
-      this.currentUser = user;
-      this.isLoggedIn = !!user;
+      this.isLoggedIn = !!user?.token;
+
+      if (user?.email && user?.token) {
+        this.authService.getAllUsers().subscribe({
+          next: (response) => {
+            const matchedUser = response.find((u: any) => u.email === user.email);
+            if (matchedUser) {
+              this.currentUser = matchedUser;
+              console.log('✅ Full user data:', matchedUser);
+            } else {
+              console.warn('⚠️ No user matched with email:', user.email);
+            }
+          },
+          error: (err) => {
+            console.error('❌ Error fetching users:', err);
+          }
+        });
+      }
     });
 
     this.authService.isAdmin$.subscribe(isAdmin => {
       console.log('🛡️ isAdmin from header:', isAdmin);
     });
+  }
+
+  toggleProfileMenu(): void {
+    this.showProfileMenu = !this.showProfileMenu;
   }
 
   logout(): void {

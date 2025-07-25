@@ -6,6 +6,7 @@ import { ProductService } from '../../../services/product.service';
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
@@ -70,6 +71,10 @@ export class ProductDetailComponent implements OnInit {
       // Add your cart service logic here if needed
     }
   }
+  getArrayFromNumber(count: number): number[] {
+     return Array(count).fill(0);
+   }
+   
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();

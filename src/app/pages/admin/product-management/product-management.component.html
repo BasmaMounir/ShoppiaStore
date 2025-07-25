@@ -1,123 +1,63 @@
 <div class="flex min-h-screen">
      <!-- Sidebar -->
      <aside class="w-64 bg-gray-800 text-white flex flex-col p-6 space-y-4">
-       <h2 class="text-2xl font-bold mb-6">Product Panel</h2>
-       <button class="py-2 px-4 rounded hover:bg-gray-700" (click)="activeSection='load'">Load Product</button>
-       <button class="py-2 px-4 rounded hover:bg-gray-700" (click)="activeSection='add'">Add Product</button>
-       <button class="py-2 px-4 rounded hover:bg-gray-700" (click)="activeSection='update'">Update Product</button>
-       <button class="py-2 px-4 rounded hover:bg-gray-700" (click)="activeSection='delete'">Delete Product</button>
+       <h3 class="text-2xl font-bold mb-6">Product Panel</h3>
+       <button class="py-2 px-4 rounded hover:bg-gray-700" (click)="activeSection = 'add'">Add Product</button>
+       <button class="py-2 px-4 rounded hover:bg-gray-700" (click)="activeSection = 'update'">Update Product</button>
+       <button class="py-2 px-4 rounded hover:bg-gray-700" (click)="activeSection = 'delete'">Delete Product</button>
      </aside>
    
      <!-- Main Content -->
      <main class="flex-grow p-8 bg-gray-100">
-       <!-- Load Product -->
-       <div *ngIf="activeSection==='load'">
-         <h2 class="text-xl font-semibold text-center mb-4">Load Product By ID</h2>
-         <label class="block mb-2">
-           <span class="text-gray-700">Enter Product ID</span>
-           <input type="number" [(ngModel)]="loadProductId" class="input" />
-         </label>
-         <button (click)="loadProductById()" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 w-full">
-           Load Product
-         </button>
+       <!-- Add Product Section -->
+       <div *ngIf="activeSection === 'add'" class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow space-y-4">
+         <h2 class="text-2xl font-bold text-center">Add New Product</h2>
+         <label class="block"><span>Name</span><input type="text" [(ngModel)]="product.name" class="input" /></label>
+         <label class="block"><span>Description</span><textarea [(ngModel)]="product.description" class="input"></textarea></label>
+         <label class="block"><span>Image Cover URL</span><input type="text" [(ngModel)]="product.imageCover" class="input" /></label>
+         <div *ngFor="let img of product.images; let i = index" class="flex items-center gap-2">
+           <input [(ngModel)]="product.images[i]" class="input" [name]="'image' + i" placeholder="Image URL" />
+           <button (click)="removeImageField(i)" class="text-red-600 hover:underline">Remove</button>
+         </div>
+         <button (click)="addImageField()" class="text-blue-600 hover:underline">+ Add another image</button>
+         <label class="block"><span>Price</span><input type="number" [(ngModel)]="product.price" class="input" /></label>
+         <label class="block"><span>Ratings Average</span><input type="number" step="0.1" [(ngModel)]="product.ratingsAverage" class="input" /></label>
+         <label class="block"><span>Category ID</span><input type="number" [(ngModel)]="product.categoryId" class="input" /></label>
+         <button (click)="addProduct()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">Add Product</button>
        </div>
    
-       <!-- Add Product -->
-       <div *ngIf="activeSection==='add'">
-         <div class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow space-y-4">
-           <h2 class="text-2xl font-bold text-center">Add New Product</h2>
-           <label class="block">
-             <span class="text-gray-700">Name</span>
-             <input type="text" [(ngModel)]="product.name" class="input" name="name" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Description</span>
-             <textarea [(ngModel)]="product.description" class="input" name="description"></textarea>
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Image Cover URL</span>
-             <input type="text" [(ngModel)]="product.imageCover" class="input" name="imageCover" />
-           </label>
+       <!-- Update Product Section -->
+       <div *ngIf="activeSection === 'update'">
+         <div class="text-right mb-2">
+           <button (click)="loadProductForUpdate()" class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow space-y-4">Load Product</button>
+         </div>
+         <form (ngSubmit)="updateProduct()" class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow space-y-4">
+           <h2 class="text-xl font-semibold text-center">Update Product</h2>
+           <label class="block"><span>Product ID</span><input type="number" [(ngModel)]="updateProductId" name="updateProductId" class="input" required /></label>
+           <label class="block"><span>Name</span><input type="text" [(ngModel)]="product.name" name="name" class="input" /></label>
+           <label class="block"><span>Description</span><textarea [(ngModel)]="product.description" name="description" class="input"></textarea></label>
+           <label class="block"><span>Image Cover URL</span><input type="text" [(ngModel)]="product.imageCover" name="imageCover" class="input" /></label>
            <div *ngFor="let img of product.images; let i = index" class="flex items-center gap-2">
-             <input [(ngModel)]="product.images[i]" class="input" placeholder="Image URL" [name]="'image'+i" />
+             <input [(ngModel)]="product.images[i]" [name]="'image' + i" class="input" placeholder="Image URL" />
              <button (click)="removeImageField(i)" class="text-red-600 hover:underline">Remove</button>
            </div>
            <button (click)="addImageField()" class="text-blue-600 hover:underline">+ Add another image</button>
-           <label class="block">
-             <span class="text-gray-700">Price</span>
-             <input type="number" [(ngModel)]="product.price" class="input" name="price" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Ratings Average</span>
-             <input type="number" [(ngModel)]="product.ratingsAverage" class="input" name="ratingsAverage" step="0.1" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Category ID</span>
-             <input type="number" [(ngModel)]="product.categoryId" class="input" name="categoryId" />
-           </label>
-           <button (click)="addProduct()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full">
-             Add Product
-           </button>
-         </div>
-       </div>
-   
-       <!-- Update Product -->
-       <div *ngIf="activeSection==='update'">
-         <form (ngSubmit)="updateProduct()" class="max-w-xl mx-auto p-6 bg-white rounded-xl shadow space-y-4">
-           <h2 class="text-xl font-semibold text-center">Update Product</h2>
-           <label class="block">
-             <span class="text-gray-700">Product ID</span>
-             <input type="number" [(ngModel)]="updateProductId" name="updateProductId" required class="input" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Name</span>
-             <input type="text" [(ngModel)]="product.name" name="updateName" required class="input" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Description</span>
-             <textarea [(ngModel)]="product.description" name="updateDescription" required class="input"></textarea>
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Image Cover URL</span>
-             <input type="text" [(ngModel)]="product.imageCover" name="updateImageCover" required class="input" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Image URLs (comma separated)</span>
-             <input type="text" [(ngModel)]="product.images" name="updateImages" required class="input" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Price</span>
-             <input type="number" [(ngModel)]="product.price" name="updatePrice" required class="input" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Ratings Average</span>
-             <input type="number" step="0.1" [(ngModel)]="product.ratingsAverage" name="updateRating" required class="input" />
-           </label>
-           <label class="block">
-             <span class="text-gray-700">Category ID</span>
-             <input type="number" [(ngModel)]="product.categoryId" name="updateCategoryId" required class="input" />
-           </label>
-           <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 w-full">
-             Update Product
-           </button>
+           <label class="block"><span>Price</span><input type="number" [(ngModel)]="product.price" name="price" class="input" /></label>
+           <label class="block"><span>Ratings Average</span><input type="number" step="0.1" [(ngModel)]="product.ratingsAverage" name="ratingsAverage" class="input" /></label>
+           <label class="block"><span>Category ID</span><input type="number" [(ngModel)]="product.categoryId" name="categoryId" class="input" /></label>
+           <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full">Update Product</button>
          </form>
        </div>
    
-       <!-- Delete Product -->
-       <div *ngIf="activeSection==='delete'">
+       <!-- Delete Product Section -->
+       <div *ngIf="activeSection === 'delete'">
          <h2 class="text-xl font-semibold text-center mb-4">Delete Product</h2>
-         <label class="block">
-           <span class="text-gray-700">Product ID</span>
-           <input type="number" [(ngModel)]="deleteProductId" class="input" />
-         </label>
-         <button (click)="deleteProduct()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 w-full mt-4">
-           Delete Product
-         </button>
+         <label class="block"><span>Product ID</span><input type="number" [(ngModel)]="deleteProductId" class="input" /></label>
+         <button (click)="deleteProduct()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 w-full mt-4">Delete Product</button>
        </div>
      </main>
    </div>
    
-   <!-- Tailwind input style helper -->
    <style>
      .input {
        width: 100%;

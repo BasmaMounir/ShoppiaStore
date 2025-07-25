@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -36,31 +37,45 @@ export class LoginComponent implements OnInit {
   onLoginSubmit(): void {
      if (this.loginForm.valid) {
        const { email, password } = this.loginForm.value;
-       this.errorMessage = '';
    
        this.authService.login({ email, password }).subscribe({
          next: (response) => {
            const roles = this.authService.getUserRoles();
    
-           if (roles.includes('ROLE_ADMIN')) {
-             this.router.navigate(['/admin/dashboard']);
-           } else {
-             this.router.navigate(['/']);
-           }
-   
-           // window.location.reload();
+           Swal.fire({
+             icon: 'success',
+             title: 'Login Successful',
+             timer: 1500,
+             showConfirmButton: false,
+           }).then(() => {
+             if (roles.includes('ROLE_ADMIN')) {
+               this.router.navigate(['/admin/dashboard']);
+             } else {
+               this.router.navigate(['/']);
+             }
+           });
          },
          error: (err: any) => {
            console.error('Login error:', err);
-           this.errorMessage = err.message || 'Login failed. Please check your credentials.';
+           Swal.fire({
+             icon: 'error',
+             title: 'Login Failed',
+             text: err.error?.message || 'Please check your email and password.',
+           });
          }
        });
    
      } else {
-       this.errorMessage = 'Please enter valid email and password.';
        this.loginForm.markAllAsTouched();
+   
+       Swal.fire({
+         icon: 'warning',
+         title: 'Invalid Input',
+         text: 'Please enter a valid email and password.',
+       });
      }
    }
+   
    
 
   get email() {

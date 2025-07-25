@@ -1,51 +1,55 @@
-<!--  Slider -->
-<div class="relative w-full overflow-hidden">
-     <div class="flex transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+<!-- Slider -->
+<div class="relative w-full overflow-hidden font-[Poppins]">
+     <div class="flex transition-transform duration-700 ease-in-out" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
        <div *ngFor="let slide of slides" class="min-w-full relative h-[500px] md:h-[600px]">
          <img [src]="slide.image" class="w-full h-full object-cover" />
-         <div class="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white text-center px-4">
-           <h2 class="text-3xl md:text-5xl font-bold mb-4">{{ slide.title }}</h2>
-           <p class="text-sm md:text-base">{{ slide.subtitle }}</p>
+   
+         <!-- Gradient overlay -->
+         <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 flex flex-col justify-center items-center text-white text-center px-6">
+           <h2 class="text-4xl md:text-6xl font-bold mb-4 animate-fade-in-up">{{ slide.title }}</h2>
+           <p class="text-base md:text-lg opacity-90 animate-fade-in-up delay-200">{{ slide.subtitle }}</p>
          </div>
        </div>
      </div>
    
-     <button (click)="prevSlide()" class="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-3xl font-bold hover:text-pink-400">‹</button>
-     <button (click)="nextSlide()" class="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-3xl font-bold hover:text-pink-400">›</button>
+     <!-- Arrows -->
+     <button (click)="prevSlide()" class="absolute top-1/2 left-6 transform -translate-y-1/2 bg-black/50 hover:bg-pink-500/70 text-white p-3 rounded-full text-2xl transition">
+       ‹
+     </button>
+     <button (click)="nextSlide()" class="absolute top-1/2 right-6 transform -translate-y-1/2 bg-black/50 hover:bg-pink-500/70 text-white p-3 rounded-full text-2xl transition">
+       ›
+     </button>
    </div>
    
-
-
-<section class="py-16 bg-gray-50">
-     <div class="max-w-7xl mx-auto px-4">
-       <!-- Title -->
-       <div class="text-center mb-10">
-         <h2 class="text-3xl font-bold text-gray-800">Shop by Category</h2>
+   <section class="py-20 bg-gradient-to-b from-white via-gray-50 to-white font-[Poppins]">
+     <div class="max-w-7xl mx-auto px-6">
+       <div class="text-center mb-14">
+         <h2 class="text-4xl font-bold text-gray-800">Shop by Category</h2>
+         <p class="mt-2 text-gray-600">Discover what you love</p>
        </div>
    
-       <!-- Categories Grid -->
-       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-         <div *ngFor="let category of categories" class="relative overflow-hidden rounded-xl shadow hover:shadow-xl transition duration-300 group">
+       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+         <div *ngFor="let category of categories" class="relative rounded-xl shadow-lg hover:shadow-2xl transition duration-300 group overflow-hidden">
            <img
              [src]="category.imageUrl"
              [alt]="category.name"
-             class="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-105"
+             class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
            />
    
-           <a [routerLink]="['/shop']" [queryParams]="{ category: category.id }"
-              class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-between p-6 text-white opacity-0 group-hover:opacity-100 transition duration-300">
-   
+           <!-- Overlay -->
+           <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-between p-5 text-white">
              <div>
-               <h3 class="text-xl font-semibold">{{ category.name }}</h3>
-               <p class="text-sm text-gray-200 mt-1">Shop Now</p>
+               <h3 class="text-2xl font-semibold">{{ category.name }}</h3>
+               <p class="text-sm text-gray-300 mt-1">Shop Now</p>
              </div>
-   
              <div>
-               <span class="text-sm underline">View All</span>
+               <a [routerLink]="['/shop']" [queryParams]="{ category: category.id }"
+                 class="inline-block bg-pink-500 hover:bg-pink-600 text-white py-2 px-4 rounded-md text-sm transition">View All</a>
              </div>
-           </a>
+           </div>
          </div>
        </div>
      </div>
    </section>
+   
    

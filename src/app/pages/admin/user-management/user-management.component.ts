@@ -8,7 +8,7 @@ interface User {
   firstName: string;
   lastName: string;
   email: string;
-  phone?: string;
+  phoneNumber?: string;
   enabled: boolean;
   role: string;
 }
@@ -46,7 +46,6 @@ export class UserManagementComponent implements OnInit {
      });
    }
    
-
   activateUser(id: number) {
     this.http.put(`https://userservice-production-f0da.up.railway.app/users/${id}/activate`, {}, {
       headers: this.getAuthHeaders(),

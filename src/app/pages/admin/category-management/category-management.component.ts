@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-category-management',
@@ -36,51 +37,109 @@ export class CategoryManagementComponent {
   }
 
   loadCategoryById() {
+    this.http
+      .get(`${this.baseUrl}/category/${this.loadCategoryId}`, {
+        headers: this.getAuthHeaders(),
+      })
+      .subscribe({
+        next: (res: any) => {
+          this.category = {
+            name: res.data?.name || '',
+            imageUrl: res.data?.imageUrl || '',
+          };
+        },
+        error: (err) => {
+          const message = err.error?.message || 'Something went wrong';
+          const data = err.error?.data;
+          Swal.fire({
+            icon: 'error',
+            html: ` ${message}<br>${data ? 'Data: <b>' + data + '</b>' : ''}`,
+          });
+        },
+      });
+  }
+
+  addCategory() {
+     if (!this.category.name.trim() || !this.category.imageUrl.trim()) {
+          Swal.fire({
+               icon: 'error',
+               html: "Both name and image URL are required.",
+             });
+       return;
+     }
+   
      this.http
-       .get(`${this.baseUrl}/category/${this.loadCategoryId}`, {
+       .post(this.baseUrl, this.category, {
          headers: this.getAuthHeaders(),
        })
        .subscribe({
          next: (res: any) => {
-           this.category = {
-             name: res.name,
-             imageUrl: res.imageUrl,
-           };
-           alert('Category Loaded ✅'+ res.data.name);
+           Swal.fire({
+             icon: 'success',
+             html: ` ${res.message}<br>New Category ID: <b>${res.data}</b>`,
+             timer: 3000,
+             showConfirmButton: false
+           });
          },
          error: (err) => {
-           console.error('Error ❌', err);
+           const message = err.error?.message || 'Something went wrong';
+           const data = err.error?.data;
+           Swal.fire({
+             icon: 'error',
+             html: ` ${message}<br>${data ? 'Data: <b>' + data + '</b>' : ''}`,
+           });
          },
        });
    }
    
 
-  addCategory() {
-    this.http.post(this.baseUrl, this.category, {
-     headers: this.getAuthHeaders()
-   }).subscribe({
-      next: () => alert('✅ Category added successfully!'),
-      error: (err) => console.error('Error adding category:', err),
-    });
-  }
-
   updateCategory() {
     this.http
       .patch(`${this.baseUrl}/${this.updateCategoryId}`, this.category, {
-          headers: this.getAuthHeaders()
-        })
+        headers: this.getAuthHeaders(),
+      })
       .subscribe({
-        next: () => alert('✏️ Category updated successfully!'),
-        error: (err) => console.error('Error updating category:', err),
+          next: (res: any) => {
+               Swal.fire({
+                 icon: 'success',
+                 html: "✏️ Category updated successfully!",
+                 timer: 3000,
+                 showConfirmButton: false
+               });
+             },
+             error: (err) => {
+               const message = err.error?.message || 'Something went wrong';
+               const data = err.error?.data;
+               Swal.fire({
+                 icon: 'error',
+                 html: ` ${message}<br>${data ? 'Data: <b>' + data + '</b>' : ''}`,
+               });
+             },
       });
   }
 
   deleteCategory() {
-    this.http.delete(`${this.baseUrl}/${this.deleteCategoryId}`, {
-     headers: this.getAuthHeaders()
-   }).subscribe({
-      next: () => alert('🗑️ Category deleted successfully!'),
-      error: (err) => console.error('Error deleting category:', err),
-    });
+    this.http
+      .delete(`${this.baseUrl}/${this.deleteCategoryId}`, {
+        headers: this.getAuthHeaders(),
+      })
+      .subscribe({
+          next: (res: any) => {
+          Swal.fire({
+               icon: 'success',
+               html: "🗑️ Category deleted successfully!",
+               timer: 3000,
+               showConfirmButton: false
+             });
+           },
+           error: (err) => {
+             const message = err.error?.message || 'Something went wrong';
+             const data = err.error?.data;
+             Swal.fire({
+               icon: 'error',
+               html: ` ${message}<br>${data ? 'Data: <b>' + data + '</b>' : ''}`,
+             });
+           },
+      });
   }
 }

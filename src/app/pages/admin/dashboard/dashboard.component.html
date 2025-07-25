@@ -1,55 +1,66 @@
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
-  <div
-    class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-teal-500 hover:bg-teal-600"
-    routerLink="products"
-    routerLinkActive="ring-4 ring-white"
-  >
-    <div class="flex items-center justify-between">
-      <i class="fas fa-shopping-cart text-2xl"></i>
-      <div class="text-right">
-        <div class="text-sm">Products</div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-pink-500 hover:bg-pink-600"
-    routerLink="users"
-    routerLinkActive="ring-4 ring-white"
-  >
-    <div class="flex items-center justify-between">
-      <i class="fas fa-user text-2xl"></i>
-      <div class="text-right">
-        <div class="text-sm">Users</div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-orange-400 hover:bg-orange-500"
-    routerLink="category"
-    routerLinkActive="ring-4 ring-white"
-  >
-    <div class="flex items-center justify-between">
-      <i class="fas fa-shopping-cart text-2xl"></i>
-      <div class="text-right">
-        <div class="text-sm">Category</div>
-      </div>
-    </div>
-  </div>
-  <div
-    class="p-6 rounded-lg shadow-md text-white cursor-pointer bg-emerald-500 hover:bg-emerald-600"
-    routerLink="stock"
-    routerLinkActive="ring-4 ring-white"
-  >
-    <div class="flex items-center justify-between">
-      <i class="fas fa-home text-2xl"></i>
-      <div class="text-right">
-        <div class="text-sm">Stock</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="p-6">
-  <router-outlet></router-outlet>
-</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+     <!-- Products Card -->
+     <div
+       class="p-6 rounded-2xl shadow-lg text-white cursor-pointer bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 transition duration-300"
+       routerLink="products"
+       routerLinkActive="ring-4 ring-white"
+     >
+       <div class="flex items-center space-x-4">
+         <i class="fas fa-shopping-cart text-3xl"></i>
+         <div>
+           <div class="text-lg font-semibold">Products</div>
+           <div class="text-sm opacity-80">Manage all products</div>
+         </div>
+       </div>
+     </div>
+   
+     <!-- Users Card -->
+     <div
+       class="p-6 rounded-2xl shadow-lg text-white cursor-pointer bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 transition duration-300"
+       routerLink="users"
+       routerLinkActive="ring-4 ring-white"
+     >
+       <div class="flex items-center space-x-4">
+         <i class="fas fa-user text-3xl"></i>
+         <div>
+           <div class="text-lg font-semibold">Users</div>
+           <div class="text-sm opacity-80">View user list</div>
+         </div>
+       </div>
+     </div>
+   
+     <!-- Category Card -->
+     <div
+       class="p-6 rounded-2xl shadow-lg text-white cursor-pointer bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 transition duration-300"
+       routerLink="category"
+       routerLinkActive="ring-4 ring-white"
+     >
+       <div class="flex items-center space-x-4">
+         <i class="fas fa-tags text-3xl"></i>
+         <div>
+           <div class="text-lg font-semibold">Category</div>
+           <div class="text-sm opacity-80">Organize categories</div>
+         </div>
+       </div>
+     </div>
+   
+     <!-- Stock Card -->
+     <div
+       class="p-6 rounded-2xl shadow-lg text-white cursor-pointer bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 transition duration-300"
+       routerLink="stock"
+       routerLinkActive="ring-4 ring-white"
+     >
+       <div class="flex items-center space-x-4">
+         <i class="fas fa-warehouse text-3xl"></i>
+         <div>
+           <div class="text-lg font-semibold">Stock</div>
+           <div class="text-sm opacity-80">Check stock levels</div>
+         </div>
+       </div>
+     </div>
+   </div>
+   
+   <div class="p-6">
+     <router-outlet></router-outlet>
+   </div>
    

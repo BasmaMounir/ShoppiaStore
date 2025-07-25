@@ -63,7 +63,7 @@
 
       <div *ngIf="category.name" class="mt-4 p-4 bg-gray-50 rounded">
         <p><strong>Name:</strong> {{ category.name }}</p>
-        <p><strong>Image URL:</strong> {{ category.imageUrl }}</p>
+        <img [src]="category.imageUrl">
       </div>
     </div>
 
@@ -127,37 +127,3 @@
     </div>
   </main>
 </div>
-
-<!-- Tailwind helper classes -->
-<style>
-  .input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #cbd5e0;
-    border-radius: 0.375rem;
-  }
-  .btn-blue {
-    background-color: #3b82f6;
-    color: white;
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-  }
-  .btn-yellow {
-    background-color: #facc15;
-    color: black;
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-  }
-  .btn-red {
-    background-color: #ef4444;
-    color: white;
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-  }
-  .btn-indigo {
-    background-color: #6366f1;
-    color: white;
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-  }
-</style>

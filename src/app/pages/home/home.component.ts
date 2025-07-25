@@ -60,4 +60,5 @@ export class HomeComponent implements OnInit {
       error: (error) => console.error('Error loading categories:', error),
     });
   }
+  
 }

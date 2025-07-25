@@ -55,6 +55,19 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  getAuthHeaders(): HttpHeaders {
+     const token = localStorage.getItem('authToken');
+     return new HttpHeaders({
+       Authorization: `Bearer ${token}`
+     });
+   }
+
+  getAllUsers(): Observable<any> {
+     return this.http.get(`${this.usersApiUrl}`,
+          {headers: this.getAuthHeaders(),}
+     );
+   }
+   
   register(user: User): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, user).pipe(
       tap(() => {}),
@@ -160,4 +173,5 @@ export class AuthService {
     const roles = this.getUserRoles();
     return roles.includes(role);
   }
+
 }

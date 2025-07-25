@@ -6,6 +6,7 @@ import { Category } from '../../../models/category';
 import { CategoryService } from '../../../services/category.service';
 import { AuthService } from '../../../services/auth.service';
 import { ProductService } from '../../../services/product.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-shop',
@@ -15,13 +16,36 @@ import { ProductService } from '../../../services/product.service';
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule
   ]
 })
 export class ShopComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = [];
   selectedCategoryId: number | null = null;
+  filteredProduct: Product[] = [];
 
+  searchText: string = '';
+  wishlist: any[] = [];
+  showWishlist: boolean = false;
+  
+  toggleWishlist(product: any) {
+    const exists = this.wishlist.find(p => p.id === product.id);
+    if (!exists) {
+      this.wishlist.push(product);
+    } else {
+      this.wishlist = this.wishlist.filter(p => p.id !== product.id);
+    }
+  }
+  
+  isWishlisted(product: any): boolean {
+    return this.wishlist.some(p => p.id === product.id);
+  }
+  
+  toggleWishlistPopup() {
+    this.showWishlist = !this.showWishlist;
+  }
+  
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
@@ -51,15 +75,23 @@ export class ShopComponent implements OnInit {
       }
     });
   }
+  filterProducts(): void {
+     const text = this.searchText.trim().toLowerCase();
+     if (!text) {
+       this.filteredProduct = this.products;
+     } else {
+       this.filteredProduct = this.products.filter(product =>
+         product.name.toLowerCase().includes(text)
+       );
+     }
+   }
+   
 
   loadAllProducts(): void {
     this.productService.getAllProducts().subscribe({
       next: (response: any) => {
-        if (response && response.data) {
-          this.products = response.data;
-        } else {
-          this.products = [];
-        }
+        this.products = response.data || [];
+        this.filteredProduct = this.products;
       },
       error: (error) => console.error('Error loading all products:', error)
     });
@@ -68,11 +100,7 @@ export class ShopComponent implements OnInit {
   loadProductsByCategoryId(categoryId: number): void {
     this.productService.getProductsByCategoryId(categoryId).subscribe({
       next: (response: any) => {
-        if (response && response.data) {
-          this.products = response.data;
-        } else {
-          this.products = [];
-        }
+        this.products = response.data || [];
       },
       error: (error) => console.error(`Error loading products for category ${categoryId}:`, error)
     });
@@ -88,19 +116,21 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  // >>>>>> Add these methods back to ShopComponent <<<<<<
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
   addToCart(product: Product): void {
     console.log('Product added to cart:', product.name);
-    // Add your cart service logic here
   }
 
   quickView(product: Product): void {
     console.log('Quick View clicked for:', product.name);
-    // Logic for opening a modal or showing quick view details
   }
-  // >>>>>> End of added methods <<<<<<
+
+  get filteredProducts(): Product[] {
+    if (!this.searchText.trim()) return this.products;
+    const text = this.searchText.toLowerCase();
+    return this.products.filter(p => p.name.toLowerCase().includes(text));
+  }
 }

@@ -1,28 +1,57 @@
-<div *ngIf="product" class="max-w-7xl mx-auto py-16 px-4 grid grid-cols-1 md:grid-cols-2 gap-10">
+<div *ngIf="product" class="max-w-7xl mx-auto py-16 px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
      <!-- Images Section -->
      <div>
-          <div class="relative overflow-hidden rounded-lg border group h-96 bg-white">
-               <img
-                 [src]="mainImageUrl"
-                 [alt]="product.name"
-                 class="w-full h-full object-contain transition-transform duration-500 ease-in-out group-hover:scale-125"
-               >
-             </div>
-             
+       <div class="relative overflow-hidden rounded-2xl border border-gray-200 group h-96 bg-white shadow-sm">
+         <img
+           [src]="mainImageUrl"
+           [alt]="product.name"
+           class="w-full h-full object-contain transition-transform duration-500 ease-in-out group-hover:scale-105">
+       </div>
    
-       <div class="flex gap-4 mt-4 overflow-x-auto">
+       <div class="flex gap-3 mt-4 overflow-x-auto">
          <img
            [src]="product.imageCover"
            (click)="changeMainImage(product.imageCover)"
-           [class.border-indigo-500]="mainImageUrl === product.imageCover"
-           class="w-24 h-24 object-cover cursor-pointer border-2 rounded-md transition hover:border-indigo-500" />
+           [class.border-amber-500]="mainImageUrl === product.imageCover"
+           class="w-20 h-20 object-cover cursor-pointer border-2 rounded-md transition hover:border-amber-400" />
    
          <img
            *ngFor="let img of product.images"
            [src]="img"
            (click)="changeMainImage(img)"
-           [class.border-indigo-500]="mainImageUrl === img"
-           class="w-24 h-24 object-cover cursor-pointer border-2 rounded-md transition hover:border-indigo-500" />
+           [class.border-amber-500]="mainImageUrl === img"
+           class="w-20 h-20 object-cover cursor-pointer border-2 rounded-md transition hover:border-amber-400" />
+       </div>
+   
+       <!-- Customer Reviews Section (moved here) -->
+       <div class="mt-10">
+         <h2 class="text-xl font-semibold mb-4 text-orange-500">Customer Reviews</h2>
+   
+         <!-- Review 1 -->
+         <div class="border-b border-gray-200 pb-4 mb-4">
+           <div class="flex items-center mb-2">
+             <div class="text-yellow-400 text-lg">
+               ★ ★ ★ ★ ☆
+             </div>
+             <span class="text-sm text-gray-500 ml-2">by Sarah M.</span>
+           </div>
+           <p class="text-gray-700 text-sm">
+             The product quality is amazing! Loved the packaging and fast delivery.
+           </p>
+         </div>
+   
+         <!-- Review 2 -->
+         <div class="border-b border-gray-200 pb-4 mb-4">
+           <div class="flex items-center mb-2">
+             <div class="text-yellow-400 text-lg">
+               ★ ★ ★ ★ ★
+             </div>
+             <span class="text-sm text-gray-500 ml-2">by Omar T.</span>
+           </div>
+           <p class="text-gray-700 text-sm">
+             Perfect choice! Definitely ordering again.
+           </p>
+         </div>
        </div>
      </div>
    
@@ -30,41 +59,46 @@
      <div>
        <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ product.name }}</h1>
    
-       <p class="text-indigo-600 text-xl font-semibold mb-2">${{ product.price }}</p>
+       <p class="text-amber-600 text-2xl font-semibold mb-3">EGP {{ product.price }}</p>
    
-       <div class="text-yellow-500 mb-4">
-         ⭐ {{ product.ratingsAverage }} / 5
+       <div class="flex items-center gap-1 text-yellow-400 mb-4 text-lg">
+         <span>⭐</span> {{ product.ratingsAverage }} / 5
        </div>
    
-       <p class="text-gray-600 mb-6">
+       <p class="text-gray-600 leading-relaxed mb-6">
          {{ product.description }}
        </p>
    
-       <!-- Quantity & Add to Cart -->
-       <div class="flex items-center gap-4 mb-6">
-         <div class="flex items-center border rounded-md">
-           <button
-             class="px-3 py-2 text-gray-600 hover:text-indigo-600 text-lg"
-             (click)="decrementQty()">
-             −
-           </button>
-           <input
-             type="number"
-             [(ngModel)]="quantity"
-             class="w-12 text-center outline-none border-l border-r"
-             min="1" />
-           <button
-             class="px-3 py-2 text-gray-600 hover:text-indigo-600 text-lg"
-             (click)="incrementQty()">
-             +
-           </button>
-         </div>
-   
+       <!-- Quantity -->
+       <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden w-fit mb-6">
          <button
-           (click)="addToCart(product)"
-           class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition">
-           Add to Cart
-         </button>
+           class="px-4 py-2 text-gray-600 hover:text-amber-600 text-xl font-bold"
+           (click)="decrementQty()">−</button>
+         <input
+           type="number"
+           [(ngModel)]="quantity"
+           class="w-14 text-center outline-none border-l border-r border-gray-300 text-base"
+           min="1" />
+         <button
+           class="px-4 py-2 text-gray-600 hover:text-amber-600 text-xl font-bold"
+           (click)="incrementQty()">+</button>
+       </div>
+   
+       <!-- Add to Cart Button Full Width -->
+       <button
+         (click)="addToCart(product)"
+         class="w-full bg-amber-500 text-white py-3 rounded-lg text-lg font-semibold shadow hover:bg-amber-600 transition mb-6">
+         Add to Cart 🛒
+       </button>
+   
+       <!-- Delivery Info -->
+       <div class="bg-gray-50 p-4 rounded-lg shadow border border-gray-200">
+         <h2 class="text-lg font-semibold text-gray-700 mb-2">🚚 Delivery Information</h2>
+         <p class="text-gray-600 text-sm">
+           Estimated delivery: <span class="font-medium">2 - 5 business days</span><br>
+           Shipping cost: <span class="font-medium text-amber-600">25 + EGP</span><br>
+           Returns: <span class="font-medium">Within 14 days of purchase</span>
+         </p>
        </div>
      </div>
    </div>

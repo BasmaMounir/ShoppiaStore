@@ -16,9 +16,14 @@ import { Observable } from 'rxjs';
   ]
 })
 export class HeaderComponent implements OnInit {
+showProfileMenu: any;
+toggleProfileMenu() {
+throw new Error('Method not implemented.');
+}
   currentUser: User | null = null;
   isLoggedIn: boolean = false;
   isAdmin$: Observable<boolean>;
+     userDetails: any;
 
   constructor(private authService: AuthService) {
     this.isAdmin$ = this.authService.isAdmin$;

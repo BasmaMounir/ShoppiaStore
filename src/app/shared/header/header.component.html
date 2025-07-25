@@ -1,51 +1,75 @@
 <header class="header-v2">
-  <div class="container-menu-desktop">
-    <div class="wrap-menu-desktop">
-      <div class="logo">
-        <a routerLink="/" class="logo-text">SHOPPIA STORE</a>
-      </div>
-
-      <nav class="menu-desktop">
-        <ul class="main-menu">
-          <li
-            routerLinkActive="active-link"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a routerLink="/">Home</a>
-          </li>
-
-          <li routerLinkActive="active-link"><a routerLink="/shop">Shop</a></li>
-
-          <li routerLinkActive="active-link">
-            <a routerLink="/about">About</a>
-          </li>
-
-          <li *ngIf="isAdmin$ | async">
-            <a routerLink="/admin/dashboard">Dashboard</a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="wrap-icon-header flex-w flex-r-m">
-
-        <ng-container *ngIf="isLoggedIn; else loginButton">
-          <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-            <span class="user-name"
-              >Hello, {{ currentUser?.firstName || currentUser?.email }}</span
-            >
-            <i class="fa fa-user ml-2"></i>
-            <button class="btn-logout" (click)="logout()">Logout</button>
-          </div>
-        </ng-container>
-        <ng-template #loginButton>
-          <a
-            routerLink="/login"
-            class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
-          >
-            <i class="fa fa-user"></i>
-          </a>
-        </ng-template>
-      </div>
-    </div>
-  </div>
-</header>
+     <div class="container-menu-desktop">
+       <div class="wrap-menu-desktop">
+         <div class="logo">
+           <a routerLink="/" class="logo-text">SHOPPIA STORE</a>
+         </div>
+   
+         <nav class="menu-desktop">
+           <ul class="main-menu">
+             <li
+               routerLinkActive="active-link"
+               [routerLinkActiveOptions]="{ exact: true }"
+             >
+               <a routerLink="/">Home</a>
+             </li>
+             <li routerLinkActive="active-link"><a routerLink="/shop">Shop</a></li>
+             <li routerLinkActive="active-link"><a routerLink="/about">About</a></li>
+             <li *ngIf="isAdmin$ | async">
+               <a routerLink="/admin/dashboard">Dashboard</a>
+             </li>
+           </ul>
+         </nav>
+   
+         <div class="wrap-icon-header flex-w flex-r-m">
+           <ng-container *ngIf="isLoggedIn && currentUser; else loginButton">
+             <div class="user-dropdown-container" (click)="toggleProfileMenu()">
+               <div class="user-info-icon">
+                 <img
+                   src="https://i.pravatar.cc/40?u={{ currentUser?.email }}"
+                   class="avatar-img"
+                   alt="Avatar"
+                 />
+                 <span class="user-name">
+                   Hi, {{ currentUser?.firstName || currentUser?.email }}
+                 </span>
+                 <i class="fa fa-chevron-down ml-1"></i>
+               </div>
+   
+               <div class="profile-dropdown animated" *ngIf="showProfileMenu">
+                 <div class="profile-item">
+                    <strong>Name:</strong> {{ (currentUser?.firstName + ' ' + currentUser?.lastName).trim() }}
+               </div>
+                 <div class="profile-item">
+                   <strong>Email:</strong> {{ currentUser?.email }}
+                 </div>
+                 <div class="profile-item">
+                    <strong>Phone:</strong> {{ currentUser?.phoneNumber }}
+                  </div>
+                 <div class="profile-item">
+                   <strong>Role:</strong> {{ currentUser?.role }}
+                 </div>
+                 <hr />
+                 <button
+                   class="btn-logout"
+                   (click)="logout(); $event.stopPropagation()"
+                 >
+                   Logout
+                 </button>
+               </div>
+             </div>
+           </ng-container>
+   
+           <ng-template #loginButton>
+             <a
+               routerLink="/login"
+               class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
+             >
+               <i class="fa fa-user"></i>
+             </a>
+           </ng-template>
+         </div>
+       </div>
+     </div>
+   </header>
+   
