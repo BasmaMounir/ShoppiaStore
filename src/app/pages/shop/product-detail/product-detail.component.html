@@ -6,6 +6,14 @@
            [src]="mainImageUrl"
            [alt]="product.name"
            class="w-full h-full object-contain transition-transform duration-500 ease-in-out group-hover:scale-105">
+         
+         <!-- 🚫 Sold Out Overlay -->
+         <div *ngIf="!product.available" 
+           class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+           <div class="bg-red-600 text-white px-6 py-3 rounded-lg font-bold text-2xl transform rotate-12">
+             SOLD OUT
+           </div>
+         </div>
        </div>
    
        <div class="flex gap-3 mt-4 overflow-x-auto">
@@ -70,25 +78,40 @@
        </p>
    
        <!-- Quantity -->
-       <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden w-fit mb-6">
+       <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden w-fit mb-6"
+         [class.opacity-50]="!product.available">
          <button
            class="px-4 py-2 text-gray-600 hover:text-amber-600 text-xl font-bold"
+           [class.cursor-not-allowed]="!product.available"
+           [disabled]="!product.available"
            (click)="decrementQty()">−</button>
          <input
            type="number"
            [(ngModel)]="quantity"
            class="w-14 text-center outline-none border-l border-r border-gray-300 text-base"
+           [disabled]="!product.available"
            min="1" />
          <button
            class="px-4 py-2 text-gray-600 hover:text-amber-600 text-xl font-bold"
+           [class.cursor-not-allowed]="!product.available"
+           [disabled]="!product.available"
            (click)="incrementQty()">+</button>
        </div>
    
        <!-- Add to Cart Button Full Width -->
        <button
+         *ngIf="product.available"
          (click)="addToCart(product)"
          class="w-full bg-amber-500 text-white py-3 rounded-lg text-lg font-semibold shadow hover:bg-amber-600 transition mb-6">
          Add to Cart 🛒
+       </button>
+
+       <!-- Sold Out Button -->
+       <button
+         *ngIf="!product.available"
+         disabled
+         class="w-full bg-gray-400 text-white py-3 rounded-lg text-lg font-semibold shadow mb-6 cursor-not-allowed">
+         Sold Out
        </button>
    
        <!-- Delivery Info -->
